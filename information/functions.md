@@ -34,13 +34,11 @@ Our new function can be called by its name: showMessage().
 
 For instance:
 
-`
-function showMessage() {
+`function showMessage() {
 alert( 'Hello everyone!' );
 }
 
-showMessage();
-`
+showMessage();`
 
 ## Local Variables
 
