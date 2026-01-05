@@ -1,27 +1,3 @@
-# Function
-
-a set of statements that performs a task or calculates a value, but for a procedure to qualify as a function, it should take some input and return an output where there is some obvious relationship between the input and the output. To use a function, you must define it somewhere in the scope from which you wish to call it.
-
-Functions are the main “building blocks” of the program. They allow the code to be called many times without repetition.
-
-##### Built it Function Examples:
-
-- alert(message)
-- prompt(message, default)
-- confirm(question)
-
-## Function Declaration
-
-To create a function we can use a function declaration.
-
-It looks like this:
-
-`function showMessage() {
-  alert( 'Hello everyone!' );
-}`Here is the refined content, formatted in clean Markdown so you can copy and paste it directly into your `.md` file. I’ve improved the hierarchy, added syntax highlighting, and clarified the concept of **Shadowing**.
-
----
-
 # Functions in JavaScript
 
 A **function** is a reusable block of code designed to perform a particular task. They are the primary "building blocks" of a program, allowing you to execute logic multiple times without repetition.
@@ -123,95 +99,105 @@ alert(userName); // John (The global variable remains unchanged)
 
 > **Best Practice:** Minimize the use of global variables. Modern code relies on functions that handle their own data. Use globals only for project-level data that must be accessible everywhere.
 
-**Would you like me to explain how "Parameters" and "Return Values" work next?**
+## 3. Parameters
 
-### How to create a function
+We can pass arbitrary data to functions using parameters.
 
-The function keyword goes first, then goes the name of the function, then a list of parameters between the parentheses (comma-separated, empty in the example above, we’ll see examples later) and finally the code of the function, also named “the function body”, between curly braces.
-
-`function name(parameter1, parameter2, ... parameterN) {
- // body
-}`
-
-### How to Call a function
-
-Our new function can be called by its name: showMessage().
-
-For instance:
+In the example below, the function has two parameters: from and text.
 
 ```javascript
-function showMessage() {
-  alert("Hello everyone!");
+function showMessage(from, text) {
+  // parameters: from, text
+  alert(from + ": " + text);
 }
 
-showMessage();
+showMessage("Ann", "Hello!"); // Ann: Hello! (*)
+showMessage("Ann", "What's up?"); // Ann: What's up? (**)
 ```
 
-## Local Variables
+When the function is called in lines `(*)` and `(**)`, the given values are copied to local variables `from` and text. Then the function uses them.
 
-A variable declared inside a function is only visible inside that function.
-
-For example:
+Here’s one more example: we have a variable from and pass it to the function. Please note: the function changes from, but the change is not seen outside, because a function always gets a copy of the value:
 
 ```javascript
-function showMessage() {
-  let message = "Hello, I'm JavaScript!"; // local variable
+function showMessage(from, text) {
+  from = "*" + from + "*"; // make "from" look nicer
 
-  alert(message);
+  alert(from + ": " + text);
 }
 
-showMessage(); // Hello, I'm JavaScript!
+let from = "Ann";
 
-alert(message); // <-- Error! The variable is local to the function
+showMessage(from, "Hello"); // *Ann*: Hello
+
+// the value of "from" is the same, the function modified a local copy
+alert(from); // Ann
 ```
 
-## Outer variables
+When a value is passed as a function parameter, it’s also called an argument.
 
-A function can access an outer variable as well, for example:
+In other words, to put these terms straight:
+
+- A parameter is the variable listed inside the parentheses in the function declaration (it’s a declaration time term).
+- An argument is the value that is passed to the function when it is called (it’s a call time term).
+  We declare functions listing their parameters, then call them passing arguments.
+
+In the example above, one might say: “the function `showMessage` is declared with two parameters, then called with two arguments: `from` and `"Hello"`”.
+
+### Default Values
+
+If a function is called, but an argument is not provided, then the corresponding value becomes undefined.
+
+For instance, the aforementioned function showMessage(from, text) can be called with a single argument:
+`showMessage("Ann");`
+
+That’s not an error. Such a call would output `"_Ann_: undefined"`. As the value for `text` isn’t passed, it becomes `undefined`.
+
+We can specify the so-called “default” (to use if omitted) value for a parameter in the function declaration, using `=`:
 
 ```javascript
-let userName = "John";
-
-function showMessage() {
-  let message = "Hello, " + userName;
-  alert(message);
+function showMessage(from, text = "no text given") {
+  alert(from + ": " + text);
 }
 
-showMessage(); // Hello, John
+showMessage("Ann"); // Ann: no text given
 ```
 
-The function has full access to the outer variable. It can modify it as well.
+Now if the text parameter is not passed, it will get the value "no text given".
 
-For Instance:
+## Returning a Value
+
+A function can return a value back into the calling code as the result.
+
+The simplest example would be a function that sums two values:
 
 ```javascript
-let userName = "John";
-
-function showMessage() {
-  userName = "Bob"; // (1) changed the outer variable
-
-  let message = "Hello, " + userName;
-  alert(message);
+function sum(a, b) {
+  return a + b;
 }
 
-alert(userName); // John before the function call
-
-showMessage();
-
-alert(userName); // Bob, the value was modified by the function
+let result = sum(1, 2);
+alert(result); // 3
 ```
 
-The outer variable is only used if there’s no local one.
+he directive return can be in any place of the function. When the execution reaches it, the function stops, and the value is returned to the calling code (assigned to result above).
 
-** If a same-named variable is declared inside the function then it shadows the outer one. For instance, in the code below the function uses the local userName. The outer one is ignored. **
+There may be many occurrences of return in a single function. For instance:
 
-! Global variables
-Variables declared outside of any function, such as the outer userName in the code above, are called global.
+```javascript
+function checkAge(age) {
+  if (age >= 18) {
+    return true;
+  } else {
+    return confirm("Do you have permission from your parents?");
+  }
+}
 
-Global variables are visible from any function (unless shadowed by locals).
+let age = prompt("How old are you?", 18);
 
-It’s a good practice to minimize the use of global variables. Modern code has few or no globals. Most variables reside in their functions. Sometimes though, they can be useful to store project-level data.
-
-```
-
+if (checkAge(age)) {
+  alert("Access granted");
+} else {
+  alert("Access denied");
+}
 ```
