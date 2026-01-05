@@ -139,11 +139,13 @@ Our new function can be called by its name: showMessage().
 
 For instance:
 
-`function showMessage() {
-alert( 'Hello everyone!' );
+```javascript
+function showMessage() {
+  alert("Hello everyone!");
 }
 
-showMessage();`
+showMessage();
+```
 
 ## Local Variables
 
@@ -151,53 +153,53 @@ A variable declared inside a function is only visible inside that function.
 
 For example:
 
-`
+```javascript
 function showMessage() {
-let message = "Hello, I'm JavaScript!"; // local variable
+  let message = "Hello, I'm JavaScript!"; // local variable
 
-alert( message );
+  alert(message);
 }
 
 showMessage(); // Hello, I'm JavaScript!
 
-alert( message ); // <-- Error! The variable is local to the function
-`
+alert(message); // <-- Error! The variable is local to the function
+```
 
 ## Outer variables
 
 A function can access an outer variable as well, for example:
 
-`
-let userName = 'John';
+```javascript
+let userName = "John";
 
 function showMessage() {
-let message = 'Hello, ' + userName;
-alert(message);
+  let message = "Hello, " + userName;
+  alert(message);
 }
 
 showMessage(); // Hello, John
-`
+```
 
 The function has full access to the outer variable. It can modify it as well.
 
 For Instance:
 
-`
-let userName = 'John';
+```javascript
+let userName = "John";
 
 function showMessage() {
-userName = "Bob"; // (1) changed the outer variable
+  userName = "Bob"; // (1) changed the outer variable
 
-let message = 'Hello, ' + userName;
-alert(message);
+  let message = "Hello, " + userName;
+  alert(message);
 }
 
-alert( userName ); // John before the function call
+alert(userName); // John before the function call
 
 showMessage();
 
-alert( userName ); // Bob, the value was modified by the function
-`
+alert(userName); // Bob, the value was modified by the function
+```
 
 The outer variable is only used if there’s no local one.
 
@@ -209,3 +211,7 @@ Variables declared outside of any function, such as the outer userName in the co
 Global variables are visible from any function (unless shadowed by locals).
 
 It’s a good practice to minimize the use of global variables. Modern code has few or no globals. Most variables reside in their functions. Sometimes though, they can be useful to store project-level data.
+
+```
+
+```
