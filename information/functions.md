@@ -18,7 +18,112 @@ It looks like this:
 
 `function showMessage() {
   alert( 'Hello everyone!' );
-}`
+}`Here is the refined content, formatted in clean Markdown so you can copy and paste it directly into your `.md` file. I’ve improved the hierarchy, added syntax highlighting, and clarified the concept of **Shadowing**.
+
+---
+
+# Functions in JavaScript
+
+A **function** is a reusable block of code designed to perform a particular task. They are the primary "building blocks" of a program, allowing you to execute logic multiple times without repetition.
+
+To qualify as a function, a procedure should take **input** and return an **output** where there is an obvious relationship between the two.
+
+### Built-in Function Examples
+
+JavaScript provides several built-in functions for browser interaction:
+
+- `alert(message)` – Shows a message.
+- `prompt(message, default)` – Shows a message asking the user to input text.
+- `confirm(question)` – Shows a message and waits for the user to press “OK” or “Cancel”.
+
+---
+
+## 1. Function Declaration
+
+To create a function, we use a **function declaration**.
+
+### Syntax
+
+```javascript
+function name(parameter1, parameter2, ...parameterN) {
+  // function body
+}
+```
+
+- **`function` keyword**: Placed first to declare the function.
+- **Name**: The name of the function (usually a verb describing what it does).
+- **Parameters**: A list of inputs between parentheses (comma-separated).
+- **Body**: The code to be executed, wrapped in curly braces `{}`.
+
+### Calling a Function
+
+To execute the code inside a function, you must "call" (invoke) it by its name followed by parentheses.
+
+```javascript
+function showMessage() {
+  alert("Hello everyone!");
+}
+
+showMessage(); // Invokes the code inside the function
+```
+
+---
+
+## 2. Variable Scope
+
+### Local Variables
+
+A variable declared inside a function is **local** to that function. It is only visible and accessible within that function's body.
+
+```javascript
+function showMessage() {
+  let message = "Hello, I'm JavaScript!"; // local variable
+  alert(message);
+}
+
+showMessage();
+alert(message); // Error! The variable is not defined outside the function.
+```
+
+### Outer (Global) Variables
+
+A function can access and modify variables declared outside of it. Variables declared outside of any function are called **Global Variables**.
+
+```javascript
+let userName = "John"; // Global variable
+
+function showMessage() {
+  userName = "Bob"; // Modifies the outer variable
+  let message = "Hello, " + userName;
+  alert(message);
+}
+
+alert(userName); // John (before call)
+showMessage(); // Hello, Bob
+alert(userName); // Bob (value was modified by the function)
+```
+
+### Variable Shadowing
+
+If a function declares a local variable with the **same name** as an outer variable, the local one "shadows" the outer one. The function will ignore the outer variable and use its own local version.
+
+```javascript
+let userName = "John";
+
+function showMessage() {
+  let userName = "Bob"; // Local variable, does not affect the global one
+  alert(userName);
+}
+
+showMessage(); // Bob
+alert(userName); // John (The global variable remains unchanged)
+```
+
+---
+
+> **Best Practice:** Minimize the use of global variables. Modern code relies on functions that handle their own data. Use globals only for project-level data that must be accessible everywhere.
+
+**Would you like me to explain how "Parameters" and "Return Values" work next?**
 
 ### How to create a function
 
